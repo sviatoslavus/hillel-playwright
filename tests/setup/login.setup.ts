@@ -2,7 +2,7 @@ import { test as setup } from '@playwright/test';
 import { HomePage } from '../../src/pages/HomePage';
 const validUser = {
     name: "Sviat",
-    lastName: "Peralta",
+    lastName: "Peralta",                        // place elsewhere later
     email: "aqa-sviat.peralta@test.com",
     password: "Qauto123"
 }

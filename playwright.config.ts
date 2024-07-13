@@ -20,6 +20,11 @@ export default defineConfig({
   reporter: 'html',
   use: {
     trace: 'on-first-retry',
+    baseURL: process.env.BASE_URL,
+        httpCredentials: {
+          username: process.env.USER_NAME!,
+          password: process.env.USER_PASS!
+        }
   },
 
   /* Configure projects for major browsers */
@@ -29,11 +34,6 @@ export default defineConfig({
       testMatch: '**.qauto.spec.ts',
       use: {
         headless: false,
-        baseURL: process.env.BASE_URL,
-        httpCredentials: {
-          username: process.env.USER_NAME!,
-          password: process.env.USER_PASS!
-        },
         storageState: 'session-storage.json',
       },
       dependencies: ['login'],
@@ -43,11 +43,6 @@ export default defineConfig({
       use:{
         headless: true,
         ...devices['Desktop Chrome'],
-        baseURL: process.env.BASE_URL,
-        httpCredentials: {
-          username: process.env.USER_NAME!,
-          password: process.env.USER_PASS!
-        },
       },
 
     },
