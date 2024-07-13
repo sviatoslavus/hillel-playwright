@@ -27,43 +27,44 @@ test.beforeEach(async ({page})=>{
 
 })
 
-
-
-test("user is able to register with valid credentials",{tag:'@positive'} , async ({page})=>{
+test.describe("registration tests",  () => {
+    test("user is able to register with valid credentials",{tag:'@positive'} , async ({page})=>{
     
-    const garagePage:GaragePage = await signUpModal.signUp(validUser)
-    await expect(garagePage.garageHeading).toHaveText("Garage")
-   
-
-})
-test('user is not able to sign up with existing credentials',{tag:'@negative'} , async({page})=>{   
-    await signUpModal.signUp(validUser)
+        const garagePage:GaragePage = await signUpModal.signUp(validUser)
+        await expect(garagePage.garageHeading).toHaveText("Garage")
+       
     
-    await expect(signUpModal.errorLabel).toBeVisible()
+    })
+    test('user is not able to sign up with existing credentials',{tag:'@negative'} , async({page})=>{   
+        await signUpModal.signUp(validUser)
+        
+        await expect(signUpModal.errorLabel).toBeVisible()
+    })
+    
+    test('the Register button is disabled if no fields are filled ',{tag:'@negative'} , async ({page})=> {
+        await signUpModal.invalidSignUp(invalidUser, "empty")
+    
+        expect(signUpModal.registerButton).toBeDisabled()
+    })
+    
+    test('error is displayed if the name is too long', async({page})=>{
+        await signUpModal.invalidSignUp(invalidUser, "longName")
+    
+        await expect(signUpModal.nameTooLongLabel).toBeVisible()
+    
+    })
+    test('error is displayed if the last name is too long', async({page})=>{
+        await signUpModal.invalidSignUp(invalidUser, "longLastName")
+      
+        await expect(signUpModal.nameTooLongLabel).toBeVisible()
+    
+    })
+    test('error is displayed if the confirmation password is not matched', async({page})=>{
+        await signUpModal.invalidSignUp(invalidUser, "passwordNotMatch")
+    
+        await expect(signUpModal.passwordNotMatchLabel).toBeVisible()
+       
+    
+    })
 })
 
-test('the Register button is disabled if no fields are filled ',{tag:'@negative'} , async ({page})=> {
-    await signUpModal.invalidSignUp(invalidUser, "empty")
-
-    expect(signUpModal.registerButton).toBeDisabled()
-})
-
-test('error is displayed if the name is too long', async({page})=>{
-    await signUpModal.invalidSignUp(invalidUser, "longName")
-
-    await expect(signUpModal.nameTooLongLabel).toBeVisible()
-
-})
-test('error is displayed if the last name is too long', async({page})=>{
-    await signUpModal.invalidSignUp(invalidUser, "longLastName")
-  
-    await expect(signUpModal.nameTooLongLabel).toBeVisible()
-
-})
-test('error is displayed if the confirmation password is not matched', async({page})=>{
-    await signUpModal.invalidSignUp(invalidUser, "passwordNotMatch")
-
-    await expect(signUpModal.passwordNotMatchLabel).toBeVisible()
-   
-
-})
