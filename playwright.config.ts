@@ -33,8 +33,23 @@ export default defineConfig({
         httpCredentials: {
           username: process.env.USER_NAME!,
           password: process.env.USER_PASS!
-        }
-      }
+        },
+        storageState: 'session-storage.json',
+      },
+      dependencies: ['login'],
+    },
+    { name : 'login',
+      testMatch: 'login.setup.ts',
+      use:{
+        headless: true,
+        ...devices['Desktop Chrome'],
+        baseURL: process.env.BASE_URL,
+        httpCredentials: {
+          username: process.env.USER_NAME!,
+          password: process.env.USER_PASS!
+        },
+      },
+
     },
     {
       name: 'smoke',

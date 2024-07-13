@@ -2,6 +2,7 @@ import { Locator, Page } from "@playwright/test";
 import { BasePage } from "./BasePage";
 import { SignUpModal } from "./Components/SignUpModal";
 import { SignInModal } from "./Components/SignInModal";
+import { GaragePage } from "./GaragePage";
 
 const validUser = {
     name: "Sviat",
@@ -33,7 +34,6 @@ export class HomePage extends BasePage{
     }
     async signInAsUser(user:Object){
         await this._signInButton.click()
-        console.log(user);
         await this._signInModal.signIn(user)
     }
 
