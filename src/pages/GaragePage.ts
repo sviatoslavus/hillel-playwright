@@ -1,5 +1,6 @@
 import { Locator, Page } from "@playwright/test";
 import { BasePage } from "./BasePage";
+import { SideBar } from "./Components/SideBarComponent";
 
 export class GaragePage extends BasePage{
 
@@ -11,6 +12,7 @@ export class GaragePage extends BasePage{
     protected readonly _mileageInput: Locator
     protected readonly _addBtn: Locator
     protected readonly _carItem: Locator
+    protected readonly _sideBar:SideBar
     
     constructor(page:Page){
         super(page, 'panel/garage')
@@ -22,6 +24,7 @@ export class GaragePage extends BasePage{
         this._addCarBtn = page.getByRole('button', {name: 'Add Car'})
         this._addBtn = this._addCarModal.getByRole('button', {name: 'Add'})
         this._carItem = this._page.locator('.car-item')
+        this._sideBar = new SideBar(this._page)
     }
 
     async selectBrand(brand: 'Audi'| 'BWM' | 'Ford' | 'Porsche' | 'Fiat'){
@@ -56,6 +59,9 @@ export class GaragePage extends BasePage{
     
       get carItem(){
         return this._carItem
+      }
+      get sideBar(){
+        return this._sideBar
       }
     
 
