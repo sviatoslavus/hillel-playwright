@@ -33,7 +33,7 @@ export default defineConfig({
       name: 'qauto',
       testMatch: '**.qauto.spec.ts',
       use: {
-        headless: false,
+        headless: true,
         storageState: 'session-storage.json',
       },
       dependencies: ['login'],

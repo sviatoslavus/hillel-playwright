@@ -18,7 +18,7 @@ test.describe("garage test", () => {
     
     test('user can add a car', async({page})=>{
       await garagePage.addCar('Audi', 'TT', 1234)
-      await expect(page.getByText('Audi TT')).toBeVisible()
+      await expect(page.getByText('Audi TT').first()).toBeVisible()
       
        
         
